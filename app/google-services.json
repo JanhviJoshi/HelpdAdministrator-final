@@ -1,0 +1,63 @@
+{
+  "project_info": {
+    "project_number": "271188393509",
+    "firebase_url": "https://helpdadministrator.firebaseio.com",
+    "project_id": "helpdadministrator",
+    "storage_bucket": "helpdadministrator.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:271188393509:android:1a446b5515081d9c",
+        "android_client_info": {
+          "package_name": "com.example.suvrat.helpdadministrator"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "271188393509-0rvkn6jklsju9hbap1v283iv6f7c7n0d.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.suvrat.helpdadministrator",
+            "certificate_hash": "76a1cfa42a08f52c1142797c693e33bda4000960"
+          }
+        },
+        {
+          "client_id": "271188393509-t33bn86ikamr7gkhguu7okebug7oq0a0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.suvrat.helpdadministrator",
+            "certificate_hash": "2d90a29b68fe4915ba83fcd472a2539efca03c2f"
+          }
+        },
+        {
+          "client_id": "271188393509-rc8828psmcd4jh8nr0vc5ug0n4cl0hfk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCKm-qfuEXBoatzyg57EBO_YnwAdG4KeLw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "271188393509-rc8828psmcd4jh8nr0vc5ug0n4cl0hfk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
