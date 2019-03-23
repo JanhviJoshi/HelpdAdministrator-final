@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -71,11 +72,13 @@ public class MainActivity extends AppCompatActivity {
     private Uri filePath;
     private final int PICK_IMAGE_REQUEST = 71;
     private StorageReference mStorageRef;
+    StorageReference storageRef;
 
     protected Location mLastLocation;
     private AddressResultReceiver mResultReceiver;
 
     String mAddressOutput,currentPhotoPath;
+    String imageFileName;
 
 
     @Override
@@ -84,7 +87,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         database = FirebaseDatabase.getInstance();
-        //mStorageRef = FirebaseStorage.getInstance().getReference();
+        FirebaseStorage storage= FirebaseStorage.getInstance();
+        storageRef= storage.getReferenceFromUrl
+                ("gs://helpdadministrator.appspot.com"); //url of firebase app
 
         //Declaring the edittexts ------
         testEdit= findViewById(R.id.test);
@@ -122,7 +127,6 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         if(choose[i].equals("Take Photo")){
-                            //camera se photo
                             //check for camera permission
                             if(ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.WRITE_CALENDAR)!=
                                     PackageManager.PERMISSION_GRANTED){
@@ -173,13 +177,11 @@ public class MainActivity extends AppCompatActivity {
                 String modeofpayment = modeofpaymentEditText.getText().toString();
                 //------------------------
 
-        /*        // Required fields-------------
-                if(TextUtils.isEmpty(name)|| TextUtils.isEmpty(dob)|| TextUtils.isEmpty(gender)|| TextUtils.isEmpty(phonenumber1)
-                        || TextUtils.isEmpty(transportation)|| TextUtils.isEmpty(modeofpayment)){
+                // Required fields-------------
+                if (TextUtils.isEmpty(name) || TextUtils.isEmpty(dob) || TextUtils.isEmpty(gender) || TextUtils.isEmpty(phonenumber1)
+                        || TextUtils.isEmpty(transportation) || TextUtils.isEmpty(modeofpayment)) {
                     Toast.makeText(MainActivity.this, "Fill all reqd fields", Toast.LENGTH_SHORT).show();
-                }
-                //-----------------------   */
-
+                }else{
                 final Maid maid = new Maid();
                 maid.setName(name);
                 maid.setDob(dob);
@@ -193,29 +195,30 @@ public class MainActivity extends AppCompatActivity {
                     String landmark = landmarkEditText.getText().toString();
                     String state = stateEditText.getText().toString();
                     String city = cityEditText.getText().toString();
-                    if(TextUtils.isEmpty(address1)||TextUtils.isEmpty(address2)||TextUtils.isEmpty(state)||
-                            TextUtils.isEmpty(city)){
-                        Toast.makeText(MainActivity.this, "Complete full address details", Toast.LENGTH_SHORT).show();
-                    }
-                    maid.setAddress1(address1);
-                    maid.setAddress2(address2);
-                    maid.setLandmark(landmark);
-                    maid.setState(state);
-                    maid.setCity(city);
+                  //  if (TextUtils.isEmpty(address1) || TextUtils.isEmpty(address2) || TextUtils.isEmpty(state) ||
+                   //         TextUtils.isEmpty(city)) {
+                    //    Toast.makeText(MainActivity.this, "Complete full address details", Toast.LENGTH_SHORT).show();
+                    //} else {
+                        maid.setAddress1(address1);
+                        maid.setAddress2(address2);
+                        maid.setLandmark(landmark);
+                        maid.setState(state);
+                        maid.setCity(city);
 
-                    String finalAddress= address1+" "+address2+" "+landmark+" "+state+" "+city;
-                    Geocoder geocoder= new Geocoder(MainActivity.this);
-                    try{
-                        List<Address> addressList= geocoder.getFromLocationName(finalAddress, 1);
-                        Address address= addressList.get(0);
-                        latitude= address.getLatitude();
-                        longitude= address.getLongitude();
-                        maid.setLati(latitude);
-                        maid.setLongi(longitude);
-                    }catch (IOException e)
-                    {
-                        //..
-                    }
+                        String finalAddress = address1 + " " + address2 + " " + landmark + " " + state + " " + city;
+                        Geocoder geocoder = new Geocoder(MainActivity.this);
+                        try {
+                            List<Address> addressList = geocoder.getFromLocationName(finalAddress, 1);
+                            Address address = addressList.get(0);
+                            latitude = address.getLatitude();
+                            longitude = address.getLongitude();
+                            maid.setLati(latitude);
+                            maid.setLongi(longitude);
+                        }catch (IOException e) {
+                            //..
+                        } catch (Exception e2) {
+                            Toast.makeText(MainActivity.this, "Enter Correct Address Details", Toast.LENGTH_LONG).show();
+                        }
                 } else {
                     maid.setLati(latitude);
                     maid.setLongi(longitude);
@@ -226,24 +229,31 @@ public class MainActivity extends AppCompatActivity {
                 maid.setBankaccount(bankaccount);
                 maid.setModeofpayment(modeofpayment);
 
-                database.getReference().child(phonenumber1 + " " + name).setValue(maid).addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if (task.isSuccessful()) {
-                            Toast.makeText(MainActivity.this, "The values have been submitted", Toast.LENGTH_SHORT).show();
+                //saving name of image coresspoding to this object
+                //will (hopefully) be used while showing data from database
+                //eg: StorageReference islandRef = storageRef.child("photoUrl.jpg");
+                //to download the image from storage into app memory via byte array
+                maid.setPhotoUrl("images/" + imageFileName);
+
+                    database.getReference().child(phonenumber1 + " " + name).setValue(maid).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (latitude != 0 || longitude != 0) {
+                                if (task.isSuccessful()) {
+                                    Toast.makeText(MainActivity.this, "The values have been submitted", Toast.LENGTH_SHORT).show();
+                                    Intent intent = new Intent(MainActivity.this, submitScreen.class);
+                                    startActivity(intent);
+                                }
+                            }
                         }
-                        Intent intent = new Intent(MainActivity.this, submitScreen.class);
-                        startActivity(intent);
-                    }
-                });
-
-
+                    });
+            } //else for reqd fields
             }
         });
         mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
         mStorageRef = FirebaseStorage.getInstance().getReference();
-
     }
+
 
     ////////////////////////// Autolocating location ////////////////////////////////////
     private void getLocationPermission() {
@@ -340,9 +350,13 @@ public class MainActivity extends AppCompatActivity {
                 final ProgressDialog progressDialog = new ProgressDialog(this);
                 progressDialog.setTitle("Uploading...");
                 progressDialog.show();
+
+                progressDialog.setCanceledOnTouchOutside(false);
                 // imageButton.setImageBitmap(bitmap);
 
-                StorageReference ref = mStorageRef.child("images/" + UUID.randomUUID().toString());
+                String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+                imageFileName = "JPEG_" + timeStamp + "_";
+                StorageReference ref = mStorageRef.child("images/"+ imageFileName);
                 ref.putFile(filePath).
                         addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                             @Override
@@ -383,7 +397,7 @@ public class MainActivity extends AppCompatActivity {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
-    //$$$$$$$$$$$$$$$$$$$ Reverse Geocoding $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+    //$$$$$$$$$$$$$$$$$$$$$$$$$$ Reverse Geocoding $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
     protected void startIntentService() {
         Intent intent = new Intent(this, FetchAddressIntentService.class);
         mResultReceiver = new AddressResultReceiver(null);
@@ -460,7 +474,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void launchUploadActivity(){
-        Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+      /*  Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
         File f = new File(currentPhotoPath);
         Uri contentUri = Uri.fromFile(f);
         mediaScanIntent.setData(contentUri);
@@ -468,13 +482,37 @@ public class MainActivity extends AppCompatActivity {
 
         Intent i = new Intent(MainActivity.this, UploadActivity.class);
         i.putExtra("filePath", currentPhotoPath);
-        startActivity(i);
+        startActivity(i);   */
+
+       final Uri fileUri= Uri.parse(currentPhotoPath);
+      /*  FirebaseStorage storage= FirebaseStorage.getInstance();
+        final StorageReference storageRef= storage.getReferenceFromUrl
+                ("gs://helpdadministrator.appspot.com"); //url of firebase app */
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inSampleSize = 8;
+        final Bitmap bitmap = BitmapFactory.decodeFile(currentPhotoPath, options);
+        imageButton.setImageBitmap(bitmap);
+
+        StorageReference childRef= storageRef.child("images/"+ fileUri.getLastPathSegment());
+        UploadTask uploadTask= childRef.putFile(Uri.parse("file://"+fileUri));
+
+        uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                Toast.makeText(MainActivity.this, "Upload Successful!", Toast.LENGTH_LONG).show();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(MainActivity.this, "Upload unSuccessful!", Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
     private File createImageFile()throws IOException {
         //creating image file name
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        String imageFileName = "JPEG_" + timeStamp + "_";
+        imageFileName = "JPEG_" + timeStamp + "_";
         File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
         File image = File.createTempFile(
                 imageFileName,  /* prefix */

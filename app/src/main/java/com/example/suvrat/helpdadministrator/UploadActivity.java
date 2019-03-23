@@ -54,6 +54,13 @@ public class UploadActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                         Toast.makeText(UploadActivity.this, "Upload Successful!", Toast.LENGTH_LONG).show();
+                /*        storageRef.child(fileUri.toString()).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                            @Override
+                            public void onSuccess(Uri uri) {
+                                Toast.makeText(UploadActivity.this, "Got the url", Toast.LENGTH_LONG).show();
+                                // Intent intent= new Intent(UploadActivity.this, MainActivity.class);
+                            }
+                        });        */
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
@@ -61,7 +68,8 @@ public class UploadActivity extends AppCompatActivity {
                         Toast.makeText(UploadActivity.this, "Upload unSuccessful!", Toast.LENGTH_LONG).show();
                     }
                 });
-
+                Intent intent= new Intent(UploadActivity.this, MainActivity.class);
+                startActivity(intent);
                 //Toast.makeText(UploadActivity.this,"Will upload photo to databse", Toast.LENGTH_SHORT).show();
             }
         });
