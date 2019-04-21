@@ -29,6 +29,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -57,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
             aadharnumberEditText, pannumberEditText, transportationEditText, bankaccountEditText,
             modeofpaymentEditText, testEdit;
     Button submit, autolocate;
+    ImageView imageView, addressicon1, addressicon2, cityicon, stateicon, landmarkicon;
     FirebaseDatabase database;
     Intent intent;
     Uri photoUri;
@@ -106,12 +108,18 @@ public class MainActivity extends AppCompatActivity {
         cityEditText = findViewById(R.id.city);
         aadharnumberEditText = findViewById(R.id.aadharnumber);
         pannumberEditText = findViewById(R.id.pannumber);
-        transportationEditText = findViewById(R.id.transportation);
-        bankaccountEditText = findViewById(R.id.bankaccount);
-        modeofpaymentEditText = findViewById(R.id.modeofpayment);
+       // transportationEditText = findViewById(R.id.transportation);
+       // bankaccountEditText = findViewById(R.id.bankaccount);
+       // modeofpaymentEditText = findViewById(R.id.modeofpayment);
         submit = findViewById(R.id.submit);
         autolocate = findViewById(R.id.autobutton);
         imageButton = findViewById(R.id.user);
+        imageView= findViewById(R.id.contact_photo_imageView);
+        addressicon1= findViewById(R.id.address_icon1_imageView);
+        addressicon2= findViewById(R.id.address_icon2_imageView);
+        cityicon= findViewById(R.id.city_icon_ImageView);
+        stateicon= findViewById(R.id.state_icon_imageView);
+        landmarkicon= findViewById(R.id.landmark_icon_imageView);
         //----------------------
 
         final String choose[]= {"Take Photo", "Choose Photo from Gallery", "Cancel"};
@@ -172,14 +180,13 @@ public class MainActivity extends AppCompatActivity {
                 String phonenumber2 = phoneNumber2EditText.getText().toString();
                 String addharnumber = aadharnumberEditText.getText().toString();
                 String pannumber = pannumberEditText.getText().toString();
-                String transportation = transportationEditText.getText().toString();
-                String bankaccount = bankaccountEditText.getText().toString();
-                String modeofpayment = modeofpaymentEditText.getText().toString();
+//                String transportation = transportationEditText.getText().toString();
+  //              String bankaccount = bankaccountEditText.getText().toString();
+    //            String modeofpayment = modeofpaymentEditText.getText().toString();
                 //------------------------
 
                 // Required fields-------------
-                if (TextUtils.isEmpty(name) || TextUtils.isEmpty(dob) || TextUtils.isEmpty(gender) || TextUtils.isEmpty(phonenumber1)
-                        || TextUtils.isEmpty(transportation) || TextUtils.isEmpty(modeofpayment)) {
+                if (TextUtils.isEmpty(name) || TextUtils.isEmpty(dob) || TextUtils.isEmpty(gender) || TextUtils.isEmpty(phonenumber1) || TextUtils.isEmpty(addharnumber)) {
                     Toast.makeText(MainActivity.this, "Fill all reqd fields", Toast.LENGTH_SHORT).show();
                 }else{
                 final Maid maid = new Maid();
@@ -225,9 +232,9 @@ public class MainActivity extends AppCompatActivity {
                 }
                 maid.setAadharnumber(addharnumber);
                 maid.setPannumber(pannumber);
-                maid.setTransportation(transportation);
-                maid.setBankaccount(bankaccount);
-                maid.setModeofpayment(modeofpayment);
+               // maid.setTransportation(transportation);
+                //maid.setBankaccount(bankaccount);
+                //maid.setModeofpayment(modeofpayment);
 
                 //saving name of image coresspoding to this object
                 //will (hopefully) be used while showing data from database
@@ -235,7 +242,7 @@ public class MainActivity extends AppCompatActivity {
                 //to download the image from storage into app memory via byte array
                 maid.setPhotoUrl("images/" + imageFileName);
 
-                    database.getReference().child(phonenumber1 + " " + name).setValue(maid).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    database.getReference().child(phonenumber1 + "" + name).setValue(maid).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if (latitude != 0 || longitude != 0) {
@@ -383,7 +390,7 @@ public class MainActivity extends AppCompatActivity {
                         });
                 try {
                     Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
-                    imageButton.setImageBitmap(bitmap);
+                    imageView.setImageBitmap(bitmap);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -438,6 +445,11 @@ public class MainActivity extends AppCompatActivity {
                        landmarkEditText.setVisibility(View.INVISIBLE);
                        stateEditText.setVisibility(View.INVISIBLE);
                        cityEditText.setVisibility(View.INVISIBLE);
+                       addressicon1.setVisibility(View.INVISIBLE);
+                       addressicon2.setVisibility(View.INVISIBLE);
+                       cityicon.setVisibility(View.INVISIBLE);
+                       stateicon.setVisibility(View.INVISIBLE);
+                       landmarkicon.setVisibility(View.INVISIBLE);
                        testEdit.setVisibility(View.VISIBLE);
                        displayAddressOutput(); //using this runOnUiThread method because otherwise its not working.
                        //as we are trying to touch a UI thread view from another thread.
@@ -491,7 +503,7 @@ public class MainActivity extends AppCompatActivity {
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inSampleSize = 8;
         final Bitmap bitmap = BitmapFactory.decodeFile(currentPhotoPath, options);
-        imageButton.setImageBitmap(bitmap);
+        imageView.setImageBitmap(bitmap);
 
         StorageReference childRef= storageRef.child("images/"+ fileUri.getLastPathSegment());
         UploadTask uploadTask= childRef.putFile(Uri.parse("file://"+fileUri));

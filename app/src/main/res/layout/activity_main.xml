@@ -1,321 +1,498 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:layout_height="match_parent">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_margin="8dp">
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Sign in"
-            android:textSize="40dp"
-            android:textStyle="bold"
-            android:textColor="#000000"
-            android:layout_marginTop="56dp"
-            android:layout_marginBottom="24dp"
-            />
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:orientation="horizontal">
-        <ImageButton
-            android:id="@+id/user"
-            android:contentDescription="Profile Pic"
-            android:layout_width="60sp"
-            android:layout_height="60sp"
-            android:layout_marginTop="16dp"
-            android:src="@drawable/user"/>
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="Name"
-            android:layout_marginLeft="8dp"
-            android:layout_gravity="center_vertical"
-            android:textColor="#000000"
-            android:textSize="20dp"
-            android:paddingLeft="64dp"
-            android:paddingRight="64dp"
-            android:paddingTop="8dp"
-            android:paddingBottom="8dp"
-            android:textColorHint="#000000"
-            android:background="@drawable/style"
-            android:id="@+id/name"/>
-        </LinearLayout>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Get started"
-            android:textSize="20dp"
-            android:textColor="#000000"
-            android:textStyle="bold"
-            android:layout_marginBottom="16dp"
-            android:layout_marginTop="16dp"/>
-        <View
+        <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#afafaf"
-            android:layout_marginBottom="16dp"/>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:hint="DOB"
-            android:layout_margin="8dp"
-            android:inputType="date"
-            android:padding="8dp"
-            android:background="@drawable/style"
-            android:textColorHint="#000000"
-            android:id="@+id/dob"/>
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:hint="Gender"
-            android:padding="8dp"
-            android:layout_margin="8dp"
-            android:inputType="text"
-            android:background="@drawable/style"
-            android:textColorHint="#000000"
-            android:id="@+id/gender"
-            />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <EditText
-                android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <TextView
+                android:id="@+id/signupText_textView"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:hint="Phone Number 1"
-                android:layout_margin="8dp"
-                android:inputType="phone"
-                android:maxLength="10"
-                android:padding="8dp"
-                android:background="@drawable/style"
-                android:textColorHint="#000000"
-                android:id="@+id/phonenumber1"
-                />
-            <EditText
-                android:layout_width="match_parent"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="64dp"
+                android:layout_marginEnd="8dp"
+                android:text="SignUp"
+                android:textColor="#A6E78F"
+                android:textSize="48sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/landmark_icon_imageView"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintEnd_toEndOf="@+id/landmark"
+                app:layout_constraintTop_toTopOf="@+id/landmark"
+                app:srcCompat="@drawable/landmarkicon" />
+
+            <ImageView
+                android:id="@+id/upload_icon_imageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:visibility="invisible"
+                app:layout_constraintStart_toEndOf="@+id/uploadAadhar_textView"
+                app:layout_constraintTop_toBottomOf="@+id/aadharnumber"
+                app:srcCompat="@drawable/cameraicon" />
+
+            <ImageView
+                android:id="@+id/upload_icon_imageView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:visibility="invisible"
+                app:layout_constraintStart_toEndOf="@+id/uploadPan_textView"
+                app:layout_constraintTop_toBottomOf="@+id/pannumber"
+                app:srcCompat="@drawable/cameraicon" />
+
+            <ImageView
+                android:id="@+id/aadhar_icon_imageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintEnd_toEndOf="@+id/aadharnumber"
+                app:layout_constraintTop_toTopOf="@+id/aadharnumber"
+                app:srcCompat="@drawable/aadharnumbericon" />
+
+            <ImageView
+                android:id="@+id/aadhar_icon_imageView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintEnd_toEndOf="@+id/pannumber"
+                app:layout_constraintTop_toTopOf="@+id/pannumber"
+                app:srcCompat="@drawable/aadharnumbericon" />
+
+            <ImageView
+                android:id="@+id/address_icon1_imageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintEnd_toEndOf="@+id/address1"
+                app:layout_constraintTop_toTopOf="@+id/address1"
+                app:srcCompat="@drawable/addressicon" />
+
+            <ImageView
+                android:id="@+id/state_icon_imageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintEnd_toEndOf="@+id/state"
+                app:layout_constraintTop_toTopOf="@+id/state"
+                app:srcCompat="@drawable/citystatemarker" />
+
+            <ImageView
+                android:id="@+id/city_icon_ImageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintEnd_toEndOf="@+id/city"
+                app:layout_constraintTop_toTopOf="@+id/city"
+                app:srcCompat="@drawable/citystatemarker" />
+
+            <ImageView
+                android:id="@+id/address_icon2_imageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintEnd_toEndOf="@+id/address2"
+                app:layout_constraintTop_toTopOf="@+id/address2"
+                app:srcCompat="@drawable/addressicon" />
+
+            <ImageView
+                android:id="@+id/calendarIcon_imageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintEnd_toEndOf="@+id/dob"
+                app:layout_constraintTop_toTopOf="@+id/dob"
+                app:srcCompat="@drawable/calendaricon" />
+
+            <ImageView
+                android:id="@+id/gender_icon_imageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/gender"
+                app:srcCompat="@drawable/gendersymbol" />
+
+            <ImageView
+                android:id="@+id/phone_icon2_imageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/phonenumber2"
+                app:srcCompat="@drawable/ringingphoneicon" />
+
+            <ImageView
+                android:id="@+id/phone_icon1_imageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintEnd_toEndOf="@+id/phonenumber1"
+                app:layout_constraintTop_toTopOf="@+id/phonenumber1"
+                app:srcCompat="@drawable/ringingphoneicon" />
+
+            <ImageView
+                android:id="@+id/contact_photo_imageView"
+                android:layout_width="83dp"
+                android:layout_height="83dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="64dp"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/circle_shape"
+                android:scaleType="centerCrop"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/signupText_textView"
+                tools:srcCompat="@tools:sample/avatars" />
+
+            <ImageButton
+                android:id="@+id/user"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="120dp"
+                android:contentDescription="Profile Pic"
+                app:layout_constraintStart_toEndOf="@+id/contact_photo_imageView"
+                app:layout_constraintTop_toBottomOf="@+id/signupText_textView"
+                app:srcCompat="@drawable/cameraicon" />
+
+            <EditText
+                android:id="@+id/name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                android:ems="10"
+                android:hint="Name"
+                android:inputType="textPersonName"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/contact_photo_imageView" />
+
+            <ImageView
+                android:id="@+id/imageView5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintEnd_toEndOf="@+id/name"
+                app:layout_constraintTop_toTopOf="@+id/name"
+                app:srcCompat="@drawable/usericon" />
+
+            <TextView
+                android:id="@+id/Address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="48dp"
                 android:layout_weight="1"
-                android:gravity="center"
-                android:hint="Phone Number 2"
-                android:inputType="phone"
-                android:layout_margin="8dp"
-                android:maxLength="10"
-                android:padding="8dp"
-                android:background="@drawable/style"
-                android:textColorHint="#000000"
+                android:text="Address"
+                android:textColor="#A6E78F"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/phonenumber1" />
+
+            <View
+                android:id="@+id/kuchbhi_seperator"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="4dp"
+                android:background="@android:color/darker_gray"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/Address" />
+
+            <EditText
+                android:id="@+id/dob"
+                android:layout_width="163dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="32dp"
+                android:ems="10"
+                android:hint="Date of Birth"
+                android:inputType="textPersonName"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/getStarted_seperator" />
+
+            <EditText
                 android:id="@+id/phonenumber2"
-                />
-        </LinearLayout>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:layout_marginBottom="16dp"
-            android:text="Address"
-            android:textColor="#000000"
-            android:textStyle="bold"
-            android:textSize="20dp" />
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#afafaf"
-            android:layout_marginBottom="16dp"/>
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Locate Automatically"
-            android:id="@+id/autobutton"/>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+                android:layout_width="163dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:layout_marginEnd="16dp"
+                android:ems="10"
+                android:hint="Phone No. 2"
+                android:inputType="textPersonName"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/gender" />
 
             <EditText
-                android:layout_width="match_parent"
+                android:id="@+id/phonenumber1"
+                android:layout_width="163dp"
                 android:layout_height="wrap_content"
-                android:text="Geocoding Test"
-                android:id="@+id/test"
-                android:visibility="invisible"/>
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="30dp"
+                android:ems="10"
+                android:hint="Phone No. 1"
+                android:inputType="textPersonName"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/dob" />
+
             <EditText
-                android:layout_width="match_parent"
+                android:id="@+id/gender"
+                android:layout_width="163dp"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:hint="Address 1"
-                android:inputType="text"
-                android:layout_margin="8dp"
-                android:padding="8dp"
-                android:background="@drawable/style"
-                android:textColorHint="#000000"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="16dp"
+                android:ems="10"
+                android:hint="Gender"
+                android:inputType="textPersonName"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/getStarted_seperator" />
+
+            <TextView
+                android:id="@+id/getStarted_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="96dp"
+                android:layout_weight="1"
+                android:text="Get Started"
+                android:textColor="#A6E78F"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/name" />
+
+            <View
+                android:id="@+id/getStarted_seperator"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="4dp"
+                android:background="@android:color/darker_gray"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/getStarted_textView" />
+
+            <EditText
                 android:id="@+id/address1"
-                />
-            <EditText
-                android:layout_width="match_parent"
+                android:layout_width="163dp"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:layout_margin="8dp"
-                android:hint="Address 2"
-                android:inputType="text"
-                android:padding="8dp"
-                android:background="@drawable/style"
-                android:textColorHint="#000000"
-                android:id="@+id/address2"/>
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:layout_margin="8dp"
-                android:hint="Landmark"
-                android:inputType="text"
-                android:padding="8dp"
-                android:background="@drawable/style"
-                android:textColorHint="#000000"
-                android:id="@+id/landmark"/>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:layout_weight="1"
-                android:hint="State"
-                android:layout_margin="8dp"
-                android:inputType="text"
-                android:padding="8dp"
-                android:background="@drawable/style"
-                android:textColorHint="#000000"
-                android:id="@+id/state"
-                />
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:layout_weight="1"
-                android:layout_margin="8dp"
-                android:hint="City/Town"
-                android:inputType="text"
-                android:padding="8dp"
-                android:background="@drawable/style"
-                android:textColorHint="#000000"
-                android:id="@+id/city"/>
-            </LinearLayout>
-        </LinearLayout>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Documents"
-            android:layout_marginTop="24dp"
-            android:layout_marginBottom="16dp"
-            android:textSize="20dp"
-            android:textStyle="bold"
-            android:textColor="#000000"/>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#afafaf"
-            android:layout_marginBottom="16dp"/>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:hint="Aadhar Number"
-                android:gravity="center"
-                android:layout_margin="8dp"
-                android:maxLength="12"
-                android:inputType="number"
-                android:padding="8dp"
-                android:background="@drawable/style"
-                android:textColorHint="#000000"
-                android:id="@+id/aadharnumber"/>
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:layout_margin="8dp"
-                android:hint="Pan Number"
-                android:maxLength="10"
-                android:inputType="number"
-                android:padding="8dp"
-                android:background="@drawable/style"
-                android:textColorHint="#000000"
-                android:id="@+id/pannumber"/>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginBottom="4dp">
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:layout_weight="1"
-                    android:layout_margin="8dp"
-                    android:hint="Transportation"
-                    android:inputType="text"
-                    android:padding="8dp"
-                    android:background="@drawable/style"
-                    android:textColorHint="#000000"
-                    android:id="@+id/transportation"/>
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:layout_weight="1"
-                    android:layout_margin="8dp"
-                    android:hint="Have Bank Account?"
-                    android:inputType="text"
-                    android:padding="8dp"
-                    android:background="@drawable/style"
-                    android:textColorHint="#000000"
-                    android:id="@+id/bankaccount"/>
-            </LinearLayout>
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:layout_margin="8dp"
-                    android:hint="Preferred mode of payment"
-                    android:layout_marginBottom="32dp"
-                    android:padding="8dp"
-                    android:background="@drawable/style"
-                    android:textColorHint="#000000"
-                    android:id="@+id/modeofpayment"/>
-        </LinearLayout>
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Submit"
-            android:layout_marginLeft="64dp"
-            android:layout_marginRight="64dp"
-            android:layout_marginBottom="16dp"
-            android:id="@+id/submit"
-            />
-    </LinearLayout>
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="32dp"
+                android:ems="10"
+                android:hint="Address1"
+                android:inputType="textPersonName"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/kuchbhi_seperator" />
 
-</ScrollView>
+            <EditText
+                android:id="@+id/address2"
+                android:layout_width="163dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="16dp"
+                android:ems="10"
+                android:hint="Address2"
+                android:inputType="textPersonName"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/kuchbhi_seperator" />
+
+            <EditText
+                android:id="@+id/test"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="60dp"
+                android:layout_marginEnd="8dp"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:text="Address2"
+                android:visibility="invisible"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/kuchbhi_seperator" />
+
+            <EditText
+                android:id="@+id/landmark"
+                android:layout_width="163dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="30dp"
+                android:ems="10"
+                android:hint="Landmark"
+                android:inputType="textPersonName"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/address1" />
+
+            <EditText
+                android:id="@+id/city"
+                android:layout_width="163dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:layout_marginEnd="16dp"
+                android:ems="10"
+                android:hint="City/Town"
+                android:inputType="textPersonName"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/address2" />
+
+            <EditText
+                android:id="@+id/state"
+                android:layout_width="163dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="30dp"
+                android:ems="10"
+                android:hint="State"
+                android:inputType="textPersonName"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/landmark" />
+
+            <Button
+                android:id="@+id/autobutton"
+
+                android:layout_width="115dp"
+                android:layout_height="37dp"
+
+                android:layout_marginStart="53dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginEnd="64dp"
+                android:background="@drawable/greenbutton"
+                android:hint="Auto Detect"
+                android:shadowColor="#A8A8A8"
+                android:shadowDx="0"
+                android:shadowDy="0"
+                android:shadowRadius="5"
+                android:textColor="#000000"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/state"
+                app:layout_constraintTop_toBottomOf="@+id/city" />
+
+            <TextView
+                android:id="@+id/documents_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="48dp"
+                android:layout_weight="1"
+                android:hint="Documents"
+                android:textColor="#A6E78F"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/state" />
+
+            <View
+                android:id="@+id/documents_seperator"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="4dp"
+                android:background="@android:color/darker_gray"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/documents_textView" />
+
+            <EditText
+                android:id="@+id/aadharnumber"
+                android:layout_width="326dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="32dp"
+                android:ems="10"
+                android:hint="Aadhar Number"
+                android:inputType="textPersonName"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/documents_seperator" />
+
+            <TextView
+                android:id="@+id/uploadAadhar_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:text="Upload Aadhar"
+                android:textColor="#0000FF"
+                android:textSize="16sp"
+                android:visibility="invisible"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/aadharnumber" />
+
+            <EditText
+                android:id="@+id/pannumber"
+                android:layout_width="326dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="30dp"
+                android:ems="10"
+                android:hint="Pan Number (optional)"
+                android:inputType="textPersonName"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/uploadAadhar_textView" />
+
+            <TextView
+                android:id="@+id/uploadPan_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:text="Upload Pan"
+                android:textColor="#0000FF"
+                android:textSize="16sp"
+                android:visibility="invisible"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/pannumber" />
+
+            <Button
+                android:id="@+id/submit"
+
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginTop="150dp"
+                android:background="#A6E78F"
+                android:text="SIGNUP"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toTopOf="@+id/uploadPan_textView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/uploadPan_textView" />
+
+        </android.support.constraint.ConstraintLayout>
+    </ScrollView>
+</android.support.constraint.ConstraintLayout>
